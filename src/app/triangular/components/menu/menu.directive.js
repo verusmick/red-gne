@@ -37,5 +37,6 @@
         var triMenuController = this;
         // get the menu and order it
         triMenuController.menu = triMenu.menu;
+        triMenuController.menu = [];
     }
 })();

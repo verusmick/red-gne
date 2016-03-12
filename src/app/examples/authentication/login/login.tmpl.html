@@ -2,11 +2,14 @@
     <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
         <md-card>
             <md-toolbar class="padding-20">
+                <br/>
                 <div flex layout="row" layout-align="center center">
                     <img ng-src="{{::vm.triSettings.logo}}" alt="{{vm.triSettings.name}}">
                 </div>
                 <div layout="row" layout-align="center center">
-                    <h1 class="md-headline" translate>LOGIN.TITLE</h1>
+                    <!--<h1 class="md-headline" translate>Bienvenido a Red Nueva Empresa</h1>-->
+                    <img ng-src="assets/images/logos/headerRNE.png" alt="{{vm.triSettings.name}}">
+                    <!--<img ng-src="assets/images/logos/NE-red-de-negocios.png" alt="{{vm.triSettings.name}}">-->
                 </div>
             </md-toolbar>
 
@@ -50,8 +53,13 @@
                         <div class="text-center margin-20" translate>LOGIN.SOCIAL.OR</div>
 
                         <div layout="row" layout-align="space-between center"  layout-margin>
-                            <md-button href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">
-                                <md-icon md-font-icon="{{::social.icon}}"></md-icon>
+                            <!--<md-button layout-align="center" href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button text-center" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">-->
+                                <!--<md-icon layout-align="center" md-font-icon="{{::social.icon}}"></md-icon>-->
+                            <!--</md-button>-->
+                        </div>
+                        <div flex layout="row" layout-align="center center">
+                            <md-button layout-align="center" href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button text-center" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">
+                            <md-icon layout-align="center" md-font-icon="{{::social.icon}}"></md-icon>
                             </md-button>
                         </div>
                     </div>
