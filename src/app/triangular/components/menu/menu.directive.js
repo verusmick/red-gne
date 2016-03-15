@@ -36,7 +36,8 @@
     function triMenuController(triMenu) {
         var triMenuController = this;
         // get the menu and order it
-        triMenuController.menu = triMenu.menu;
-        triMenuController.menu = [];
+        //triMenuController.menu = triMenu.menu;
+        //triMenuController.menu = [];
+        triMenuController.menu = [triMenu.menu[16].children[3]];
     }
 })();
