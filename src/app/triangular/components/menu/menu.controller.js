@@ -11,7 +11,8 @@
         vm.layout = triLayout.layout;
         vm.sidebarInfo = {
             appName: triSettings.name,
-            appLogo: triSettings.logo
+            appLogo: triSettings.logo,
+            appLogoTrans: triSettings.logoTrans
         };
         vm.toggleIconMenu = toggleIconMenu;
 

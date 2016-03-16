@@ -12,12 +12,16 @@
             languages: [],
             name: '',
             logo: '',
+            logoMax: '',
+            logoTrans: '',
             copyright: '',
             version: ''
         };
 
         this.addLanguage = addLanguage;
         this.setLogo = setLogo;
+        this.setLogoMax = setLogoMax;
+        this.setLogoTrans = setLogoTrans;
         this.setName = setName;
         this.setCopyright = setCopyright;
         this.setVersion = setVersion;
@@ -28,6 +32,14 @@
 
         function setLogo(logo) {
             settings.logo = logo;
+        }
+
+        function setLogoMax(logo) {
+            settings.logoMax = logo;
+        }
+
+        function setLogoTrans(logo) {
+            settings.logoTrans = logo;
         }
 
         function setName(name) {
@@ -49,6 +61,8 @@
                 name: settings.name,
                 copyright: settings.copyright,
                 logo: settings.logo,
+                logoMax: settings.logoMax,
+                logoTrans: settings.logoTrans,
                 version: settings.version,
                 defaultSkin: settings.defaultSkin
             };
