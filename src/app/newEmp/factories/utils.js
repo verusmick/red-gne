@@ -9,7 +9,7 @@
     .factory('utilsDataFunctions', utilsDataFunctions);
 
   /* @ngInject */
-  function utilsDataFunctions() {
+  function utilsDataFunctions($mdToast) {
 
     var utils = {};
 
@@ -1013,6 +1013,28 @@
     ];
     utils.getCountries = function(){
       return utils.countries;
+    };
+    utils.encoding64 = function(string){
+      if(string){
+        return btoa(string)
+      }
+    };
+    utils.decoding64 = function(hash){
+      if(hash){
+        return atob(hash);
+      }
+    };
+
+    utils.openCustomToast = function(params){
+      $mdToast.show({
+        hideDelay: params.delay,
+        position: 'top right',
+        controller: function ToastCtrl($scope, $mdToast, $state, params) {
+          $scope.objParam = params;
+        },
+        locals: {params: params},
+        templateUrl: '../app/newEmp/factories/templates/toast-template.html'
+      });
     };
     return utils;
   }

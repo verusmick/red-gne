@@ -6,20 +6,25 @@
     .controller('SignupController', SignupController);
 
   /* @ngInject */
-  function SignupController($scope, $state, $mdToast, $http, $filter, triSettings, API_CONFIG, utilsDataFunctions) {
+  function SignupController($scope, $state, $mdToast, $http, $filter, triSettings, API_CONFIG, utilsDataFunctions, User) {
 
     var vm = this;
+    var userModel = User;
     vm.triSettings = triSettings;
-    vm.signupClick = signupClick;
+    vm.signupClick = registration;
     vm.utils = utilsDataFunctions;
     vm.flagValidationForm = false;
     vm.user = {
-      name: '',
-      email: '',
+      firstName:'',
+      lastName:'',
+      username: 'test'+ _.random(1000, 1000000),
       password: '',
-      confirm: '',
+      passwordRepeat: '',
+      email: '',
+      isHashed:true,
       country: null
     };
+
     vm.countrySelector = {
       countries: this.utils.getCountries(),
       placeholder: $filter('translate')('SIGNUP.COUNTRY.PLACEHOLDER'),
@@ -29,6 +34,8 @@
       querySearch: querySearch,
       selectedItemChange: selectedItemChange
     };
+
+    var customToast = {};
 
     /**
      * Search for countries
@@ -63,48 +70,63 @@
      * */
 
     $scope.$watchCollection('vm.user', function (data) {
-      if (data.password == data.confirm) {
-        for (var i in data) {
-          if (!!data[i]) {
-            vm.flagValidationForm = true;
+      if (data) {
+        if (data.password == data.passwordRepeat) {
+          for (var i in data) {
+            if (!!data[i]) {
+              vm.flagValidationForm = true;
+            }
+            else {
+              vm.flagValidationForm = false;
+              break
+            }
           }
-          else {
-            vm.flagValidationForm = false;
-            break
-          }
+        } else {
+          vm.flagValidationForm = false;
         }
-      } else {
-        vm.flagValidationForm = false;
       }
     });
 
+    /**
+     * Set given user before to send
+     *
+     * @param {object} user
+     */
+    var parserObjectToSend = function (objectToSend){
+      if(!_.isEmpty(objectToSend)){
+        objectToSend.password = vm.utils.encoding64(objectToSend.password);
+        objectToSend.passwordRepeat = vm.utils.encoding64(objectToSend.passwordRepeat);
+        return objectToSend;
+      }
+    };
 
-    function signupClick() {
-      $http({
-        method: 'POST',
-        url: API_CONFIG.url + 'signup',
-        data: $scope.user
-      }).
-        success(function (data) {
+    $scope.goToLogin = function(){
+      $mdToast.hide();
+      $state.go('authentication.login');
+    };
+
+    function registration() {
+      vm.flagValidationForm = false;
+      var userToSend = _.clone(vm.user);
+      userToSend = parserObjectToSend(userToSend);
+      userModel.register(userToSend,
+        function success(data) {
+          customToast.message = 'Congratulation, Your account has been created. An email is being sent to the address you provided. Please check for this message.';
+          customToast.labelButton = 'Back To Login';
+          customToast.success = $scope.goToLogin;
+          customToast.delay = 20000;
+          vm.utils.openCustomToast(customToast);
+        },
+        function errorSuccess(data) {
+          vm.flagValidationForm = true;
+          var message = data ? data.error : $filter('translate')('SIGNUP.MESSAGES.NO_SIGNUP');
           $mdToast.show(
             $mdToast.simple()
-              .content($filter('translate')('SIGNUP.MESSAGES.CONFIRM_SENT') + ' ' + data.email)
-              .position('bottom right')
-              .action($filter('translate')('SIGNUP.MESSAGES.LOGIN_NOW'))
-              .highlightAction(true)
-              .hideDelay(0)
-          ).then(function () {
-              $state.go('public.auth.login');
-            });
-        }).
-        error(function () {
-          $mdToast.show(
-            $mdToast.simple()
-              .content($filter('translate')('SIGNUP.MESSAGES.NO_SIGNUP'))
-              .position('bottom right')
+              .content(message)
+              .position('top right')
               .hideDelay(5000)
           );
-        });
+        })
     }
   }
 })();

@@ -1,4 +1,4 @@
-<div layout="row" flex layout-padding layout-fill layout-align="center center" id="main-content">
+<div layout="row" flex layout-padding layout-fill layout-align="center center" id="main-content" ng-cloak>
     <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
         <md-card>
             <md-toolbar class="padding-20">
@@ -14,14 +14,32 @@
             <md-content class="md-padding">
                 <form name="signup">
                     <md-input-container class="md-block">
-                        <label for="name" translate>SIGNUP.NAME.LABEL</label>
-                        <input id="name" label="name" name="name" type="text" ng-model="vm.user.name" required/>
-                        <div ng-messages="signup.name.$error">
+                        <label for="firstName" translate>SIGNUP.FIRSTNAME.LABEL</label>
+                        <input id="firstName" label="firstName" name="firstName" type="text" ng-model="vm.user.firstName" required/>
+                        <div ng-messages="signup.firstName.$error">
                             <div ng-message when="required">
-                                <span translate>SIGNUP.NAME.PLEASE_ENTER</span>
+                                <span translate>SIGNUP.FIRSTNAME.PLEASE_ENTER</span>
                             </div>
                         </div>
                     </md-input-container>
+                    <md-input-container class="md-block">
+                        <label for="lastName" translate>SIGNUP.LASTNAME.LABEL</label>
+                        <input id="lastName" label="lastName" name="lastName" type="text" ng-model="vm.user.lastName" required/>
+                        <div ng-messages="signup.lastName.$error">
+                            <div ng-message when="required">
+                                <span translate>SIGNUP.LASTNAME.PLEASE_ENTER</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!--<md-input-container class="md-block">-->
+                        <!--<label for="username" translate>SIGNUP.USERNAME.LABEL</label>-->
+                        <!--<input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>-->
+                        <!--<div ng-messages="signup.username.$error">-->
+                            <!--<div ng-message when="required">-->
+                                <!--<span translate>SIGNUP.USERNAME.PLEASE_ENTER</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</md-input-container>-->
                     <md-input-container class="md-block">
                         <label for="email" translate>SIGNUP.EMAIL.LABEL</label>
                         <input id="email" label="email" name="email" type="email" ng-model="vm.user.email" required/>
@@ -53,7 +71,7 @@
 
                     <md-input-container class="md-block">
                         <label for="password" translate>SIGNUP.PASSWORD_CONFIRM.LABEL</label>
-                        <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="signup.password" ng-minlength="8" required/>
+                        <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.passwordRepeat" tri-same-password="signup.password" ng-minlength="8" required/>
                         <div ng-messages="signup.confirm.$error">
                             <div ng-message when="required">
                                 <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
@@ -86,6 +104,7 @@
 
                         </md-autocomplete>
                     </div>
+
                     <md-button
                             class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
                             ng-click="vm.signupClick()"
@@ -95,7 +114,7 @@
                     </md-button>
 
                     <md-button  class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
-                                href="#/login"
+                                ng-click="goToLogin()"
                                 translate="SIGNUP.HAVE_LOGIN"
                                 aria-label="{{'SIGNUP.HAVE_LOGIN' | translate}}">
                     </md-button>

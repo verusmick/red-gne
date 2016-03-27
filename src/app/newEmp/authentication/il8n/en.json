@@ -40,25 +40,37 @@
             "LABEL": "name",
             "PLEASE_ENTER": "Please enter your name"
         },
-        "EMAIL": {
-            "LABEL": "email",
-            "PLEASE_ENTER": "Please enter your email address",
-            "PLEASE_VALID": "Please enter a valid email address"
+        "FIRSTNAME": {
+            "LABEL": "First Name",
+            "PLEASE_ENTER": "Please enter your First Name"
+        },
+        "LASTNAME": {
+            "LABEL": "Last Name",
+            "PLEASE_ENTER": "Please enter your Last Name"
+        },
+        "USERNAME": {
+            "LABEL": "Username",
+            "PLEASE_ENTER": "Please enter your Username"
         },
         "PASSWORD": {
-            "LABEL": "password",
+            "LABEL": "Password",
             "PLEASE_ENTER": "Please enter a password",
             "MIN_LENGTH": "Your password must be greater than 8 characters long",
             "SAME_PASSWORD": "You need to enter the same password"
         },
         "PASSWORD_CONFIRM": {
-            "LABEL": "confirm password"
+            "LABEL": "Confirm password"
         },
-        "BUTTON": "Sign Up",
-        "HAVE_LOGIN": "Already have an account? Login here.",
+        "EMAIL": {
+            "LABEL": "Email",
+            "PLEASE_ENTER": "Please enter your email address",
+            "PLEASE_VALID": "Please enter a valid email address"
+        },
         "COUNTRY": {
             "PLACEHOLDER":"Select your country"
         },
+        "BUTTON": "Sign Up",
+        "HAVE_LOGIN": "Already have an account? Login here.",
         "MESSAGES": {
             "CONFIRM_SENT": "Confirmation sent to",
             "LOGIN_NOW": "Login",
