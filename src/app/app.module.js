@@ -22,5 +22,7 @@
     key: 'pt'
   }]).constant('API_CONFIG', {    // set a constant for the API we are connecting to
     'url': 'http://triangular-api.oxygenna.com//'
-  });
+  }).constant('_',
+    window._
+  );
 })();

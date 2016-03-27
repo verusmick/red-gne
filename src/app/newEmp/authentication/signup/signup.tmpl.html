@@ -65,31 +65,41 @@
                             </div>
                         </ng-messages>
                     </md-input-container>
-                    <!--<md-input-container class="md-block">-->
                     <div>
-                        <md-autocomplete
-                                class="margin-bottom-20"
+                        <md-autocomplete flex required
+                                md-input-name = "country"
                                 md-selected-item="vm.countrySelector.objSelected"
                                 md-search-text="vm.countrySelector.searchText"
                                 md-items="country in vm.countrySelector.querySearch(vm.countrySelector.searchText)"
                                 md-min-length="0"
                                 md-selected-item-change="vm.countrySelector.selectedItemChange(vm.countrySelector.objSelected)"
-                                placeholder="{{vm.countrySelector.placeholder}}"
                                 md-item-text="country.name"
+                                md-floating-label="{{vm.countrySelector.placeholder}}"
                                 >
-
+                            <md-item-template>
                             <span md-highlight-text="vm.countrySelector.searchText">{{country.name}}</span>
+                                </md-item-template>
+                            <md-not-found>
+                                No states matching were found.
+                            </md-not-found>
+
                         </md-autocomplete>
                     </div>
-                    <!--</md-input-container>-->
+                    <md-button
+                            class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
+                            ng-click="vm.signupClick()"
+                            ng-disabled="!vm.flagValidationForm"
+                            translate="SIGNUP.BUTTON"
+                            aria-label="{{'SIGNUP.BUTTON' | translate}}">
+                    </md-button>
 
-                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.signupClick()" ng-disabled="signup.$invalid" translate="SIGNUP.BUTTON" aria-label="{{'SIGNUP.BUTTON' | translate}}"></md-button>
-
-                    <md-button  class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/login" translate="SIGNUP.HAVE_LOGIN" aria-label="{{'SIGNUP.HAVE_LOGIN' | translate}}"></md-button>
-
+                    <md-button  class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
+                                href="#/login"
+                                translate="SIGNUP.HAVE_LOGIN"
+                                aria-label="{{'SIGNUP.HAVE_LOGIN' | translate}}">
+                    </md-button>
                 </form>
             </md-content>
-
         </md-card>
     </div>
 </div>

@@ -1,86 +1,110 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('app.newEmp.authentication')
-        .controller('SignupController', SignupController);
+  angular
+    .module('app.newEmp.authentication')
+    .controller('SignupController', SignupController);
 
-    /* @ngInject */
-    function SignupController($scope, $state, $mdToast, $http, $filter, triSettings, API_CONFIG, utilsDataFunctions) {
-        var vm = this;
-        vm.triSettings = triSettings;
-        vm.signupClick = signupClick;
-        vm.utils = utilsDataFunctions;
-        vm.countrySelector= {};
-        vm.user = {
-            name: '',
-            email: '',
-            password: '',
-            confirm: ''
-        };
+  /* @ngInject */
+  function SignupController($scope, $state, $mdToast, $http, $filter, triSettings, API_CONFIG, utilsDataFunctions) {
 
-      vm.countrySelector = {
-        countries: this.utils.getCountries(),
-        placeholder: $filter('translate')('SIGNUP.COUNTRY.PLACEHOLDER'),
-        objSelected: null,
-        searchText: null,
-        searchTextChange: null,
-        querySearch: querySearch,
-        selectedItemChange: selectedItemChange
-      };
+    var vm = this;
+    vm.triSettings = triSettings;
+    vm.signupClick = signupClick;
+    vm.utils = utilsDataFunctions;
+    vm.flagValidationForm = false;
+    vm.user = {
+      name: '',
+      email: '',
+      password: '',
+      confirm: '',
+      country: null
+    };
+    vm.countrySelector = {
+      countries: this.utils.getCountries(),
+      placeholder: $filter('translate')('SIGNUP.COUNTRY.PLACEHOLDER'),
+      objSelected: null,
+      searchText: null,
+      searchTextChange: null,
+      querySearch: querySearch,
+      selectedItemChange: selectedItemChange
+    };
 
-      /**
-       * Search for countries
-       */
-      function querySearch(query) {
-        var results = query ? vm.countrySelector.countries.filter(createFilterFor(query)) : vm.countrySelector.countries;
-        return results;
-      }
-      /**
-       * Create filter function for a query string
-       */
-      function createFilterFor(query) {
-        var lowercaseQuery = angular.lowercase(query);
-        return function filterFn(country) {
-          var lowercaseCountry = angular.lowercase(country.name);
-          return (lowercaseCountry.indexOf(lowercaseQuery) === 0);
-        };
-      }
-      /**
-       *Select country and parser in the User map
-       * */
-      function selectedItemChange(data){
-        console.log('---->', data);
-
-      }
-
-
-        function signupClick() {
-            $http({
-                method: 'POST',
-                url: API_CONFIG.url + 'signup',
-                data: $scope.user
-            }).
-            success(function(data) {
-                $mdToast.show(
-                    $mdToast.simple()
-                    .content($filter('translate')('SIGNUP.MESSAGES.CONFIRM_SENT') + ' ' + data.email)
-                    .position('bottom right')
-                    .action($filter('translate')('SIGNUP.MESSAGES.LOGIN_NOW'))
-                    .highlightAction(true)
-                    .hideDelay(0)
-                ).then(function() {
-                    $state.go('public.auth.login');
-                });
-            }).
-            error(function() {
-                $mdToast.show(
-                    $mdToast.simple()
-                    .content($filter('translate')('SIGNUP.MESSAGES.NO_SIGNUP'))
-                    .position('bottom right')
-                    .hideDelay(5000)
-                );
-            });
-        }
+    /**
+     * Search for countries
+     */
+    function querySearch(query) {
+      var results = query ? vm.countrySelector.countries.filter(createFilterFor(query)) : vm.countrySelector.countries;
+      return results;
     }
+
+    /**
+     * Create filter function for a query string
+     */
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(country) {
+        var lowercaseCountry = angular.lowercase(country.name);
+        return (lowercaseCountry.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    /**
+     *Select country and parser in the User map
+     * */
+
+    function selectedItemChange(data) {
+      vm.user.country = data ? data.code : null;
+    }
+
+    /**
+     * form Validation
+     * */
+
+    $scope.$watchCollection('vm.user', function (data) {
+      if (data.password == data.confirm) {
+        for (var i in data) {
+          if (!!data[i]) {
+            vm.flagValidationForm = true;
+          }
+          else {
+            vm.flagValidationForm = false;
+            break
+          }
+        }
+      } else {
+        vm.flagValidationForm = false;
+      }
+    });
+
+
+    function signupClick() {
+      $http({
+        method: 'POST',
+        url: API_CONFIG.url + 'signup',
+        data: $scope.user
+      }).
+        success(function (data) {
+          $mdToast.show(
+            $mdToast.simple()
+              .content($filter('translate')('SIGNUP.MESSAGES.CONFIRM_SENT') + ' ' + data.email)
+              .position('bottom right')
+              .action($filter('translate')('SIGNUP.MESSAGES.LOGIN_NOW'))
+              .highlightAction(true)
+              .hideDelay(0)
+          ).then(function () {
+              $state.go('public.auth.login');
+            });
+        }).
+        error(function () {
+          $mdToast.show(
+            $mdToast.simple()
+              .content($filter('translate')('SIGNUP.MESSAGES.NO_SIGNUP'))
+              .position('bottom right')
+              .hideDelay(5000)
+          );
+        });
+    }
+  }
 })();
