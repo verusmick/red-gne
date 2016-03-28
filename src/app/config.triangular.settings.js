@@ -8,12 +8,12 @@
     var now = new Date();
     // set app name & logo (used in loader, sidemenu, footer, login pages, etc)
     triSettingsProvider.setName('Nueva Empresa');
-    triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + ' oxygenna.com');
+    triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + 'rednuevaempresa.com');
     triSettingsProvider.setLogo('assets/images/logo.png');
     triSettingsProvider.setLogoMax('assets/images/newEmp/logo.png');
     triSettingsProvider.setLogoTrans('assets/images/newEmp/logo2.png');
     // set current version of app (shown in footer)
-    triSettingsProvider.setVersion('2.5.1');
+    triSettingsProvider.setVersion('0.1');
     // set the document title that appears on the browser tab
     triRouteProvider.setTitle('Nueva Empresa');
     triRouteProvider.setSeparator('|');

@@ -6,8 +6,9 @@
         .controller('ProfileController', ProfileController);
 
     /* @ngInject */
-    function ProfileController() {
+    function ProfileController(User) {
         var vm = this;
+        vm.userModel = User;
         vm.settingsGroups = [{
             name: 'ADMIN.NOTIFICATIONS.ACCOUNT_SETTINGS',
             settings: [{
@@ -40,11 +41,11 @@
             }]
         }];
         vm.user = {
-            name: 'Christos',
-            email: 'info@oxygenna.com',
-            location: 'Sitia, Crete, Greece',
-            website: 'http://www.oxygenna.com',
-            twitter: 'oxygenna',
+            name: vm.userModel.current.username,
+            email: vm.userModel.current.email,
+            //location: '',
+            //website: '',
+            //twitter: '',
             bio: 'We are a small creative web design agency \n who are passionate with our pixels.',
             current: '',
             password: '',

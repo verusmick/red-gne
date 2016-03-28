@@ -58,7 +58,13 @@
                         <div class="text-center margin-20" translate>LOGIN.SOCIAL.OR</div>
 
                         <div layout="row" layout-align="center center"  layout-margin>
-                            <md-button href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">
+                            <md-button
+                                    href="#"
+                                    ng-repeat="social in ::vm.socialLogins"
+                                    class="md-icon-button"
+                                    ng-style="{ 'background-color': social.color }"
+                                    aria-label="{{social.icon}}"
+                                    ng-click="social.method()">
                                 <md-icon md-font-icon="{{::social.icon}}"></md-icon>
                             </md-button>
                         </div>

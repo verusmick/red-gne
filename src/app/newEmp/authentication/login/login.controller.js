@@ -26,9 +26,11 @@
       {
         icon: 'fa fa-facebook',
         color: '#337ab7',
-        url: '#'
+        url: '#',
+        method:userModel.facebookLogin
       }
     ];
+
 
     parserObjectToSend = function (objectToSend) {
       if (!_.isEmpty(objectToSend)) {
@@ -50,8 +52,18 @@
      * */
 
     $rootScope.$on('user.successLogin', function (event, data) {
-      console.log('user.successLogin', data);
       if(data){
+        $state.go('triangular.admin-default.profile');
+      }
+    });
+
+    /**
+     * Lisen successLogin Facebook request
+     * */
+
+    $rootScope.$on('user.successLoginFB', function (event, data) {
+      if(data){
+        console.log('------->', data);
         $state.go('triangular.admin-default.profile');
       }
     });
