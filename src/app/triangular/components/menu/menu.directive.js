@@ -36,6 +36,13 @@
     function triMenuController(triMenu) {
         var triMenuController = this;
         // get the menu and order it
-        triMenuController.menu = triMenu.menu;
+        //triMenuController.menu = triMenu.menu;
+        triMenuController.menu = [
+            {
+                name: "MENU.AUTH.PROFILE",
+                state: "triangular.admin-default.profile",
+                type: "link"
+            }
+        ];
     }
 })();
