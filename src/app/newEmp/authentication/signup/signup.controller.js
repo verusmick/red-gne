@@ -17,7 +17,8 @@
     vm.user = {
       firstName:'',
       lastName:'',
-      username: 'test'+ _.random(1000, 1000000),
+      //username: 'test'+ _.random(1000, 1000000),
+      username: '',
       password: '',
       passwordRepeat: '',
       email: '',

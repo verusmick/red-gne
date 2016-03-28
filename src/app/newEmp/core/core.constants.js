@@ -10,7 +10,7 @@
     .constant('_URL','http://localhost:8080/nueva-empresa/api/')
     .constant ('_USER',{
       'create':'user/create',
-      'login':'user/login/',
+      'login':'user/login',
       'users':'user/'
     }
   );

@@ -1,4 +1,4 @@
-<div layout="row" flex layout-padding layout-fill layout-align="center center" id="main-content" ng-cloak>
+<div layout="row" flex layout-padding layout-fill layout-align="center center"  ng-cloak>
     <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
         <md-card>
             <md-toolbar class="padding-20">
@@ -31,15 +31,15 @@
                             </div>
                         </div>
                     </md-input-container>
-                    <!--<md-input-container class="md-block">-->
-                        <!--<label for="username" translate>SIGNUP.USERNAME.LABEL</label>-->
-                        <!--<input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>-->
-                        <!--<div ng-messages="signup.username.$error">-->
-                            <!--<div ng-message when="required">-->
-                                <!--<span translate>SIGNUP.USERNAME.PLEASE_ENTER</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</md-input-container>-->
+                    <md-input-container class="md-block">
+                        <label for="username" translate>SIGNUP.USERNAME.LABEL</label>
+                        <input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>
+                        <div ng-messages="signup.username.$error">
+                            <div ng-message when="required">
+                                <span translate>SIGNUP.USERNAME.PLEASE_ENTER</span>
+                            </div>
+                        </div>
+                    </md-input-container>
                     <md-input-container class="md-block">
                         <label for="email" translate>SIGNUP.EMAIL.LABEL</label>
                         <input id="email" label="email" name="email" type="email" ng-model="vm.user.email" required/>

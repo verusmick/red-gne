@@ -4,7 +4,7 @@
             <p>
                 {{objParam.message}}
             </p>
-            <md-button ng-click="objParam.success()" class="md-highlight"
+            <md-button ng-if="objParam.labelButton" ng-click="objParam.success()" class="md-highlight"
                        style="padding-left: 10px;padding-right: 10px;">
                 {{objParam.labelButton}}
             </md-button>
